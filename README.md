@@ -1,3 +1,4 @@
+
 # Datenbankpraktikum 2015
 
 Dies ist das Repository zum Datenbankenpraktikum 2015 an der Universität Osnabrück. Es dient hauptsächlich zur Koordination.
@@ -11,3 +12,11 @@ Die Repositories der einzelnen Gruppen sind hier zu finden:
 - Gruppe D: [Eigenes DBMS](https://github.com/OsnaCS/uosql-server)
 
 Die meisten weiteren Informationen zur Koordination sind im [Wiki dieses Repositories](https://github.com/OsnaCS/dbp-2015/wiki) zu finden.
+=======
+#study-administration
+
+Tool for planning next semesters courses
+
+TODO: 
+- Add main functions of this tool
+
