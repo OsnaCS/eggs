@@ -35,7 +35,7 @@ class UsersController < ApplicationController
         # Send email to user
         UserMailer.welcome_email(@user).deliver_now
 
-        format.html { redirect_to @user, notice: 'Benutzer wurde erfolgreich erstellt.' }
+        format.html { redirect_to edit_profile_path @user.profile, notice: 'Benutzer wurde erfolgreich erstellt.' }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }

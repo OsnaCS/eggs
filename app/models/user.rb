@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   validates :password_confirmation, presence: true, :on=>[:create, :update]
 
   validates :email, presence: true, email: true, uniqueness: true
-
+  
   after_create :create_profile
 
   has_many :ratings
