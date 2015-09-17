@@ -45,22 +45,6 @@
           <% else %>
             <td>
           <% end %>
-          <div class="btn-group btn-group-justified">
-            <% if can? :edit, @block %>
-            <%= link_to edit_block_path(block), class: "btn btn-default" do %>
-              <span class="has-tooltip" data-toggle="tooltip" title="Bearbeiten">            
-                <i class="glyphicon glyphicon-pencil middle_icon"></i>
-              </span>
-            <% end %>
-            <% end %>
-            <% if can? :destroy, @block %>
-            <%= link_to block, method: :delete, data: { confirm: 'Sicher?' } , class: "btn btn-default" do %>
-              <span class="has-tooltip" data-toggle="tooltip" title="Löschen">
-                <i class="glyphicon glyphicon-trash middle_icon"></i>
-              </span>
-            <% end %>
-            <% end %>
-            </div>
             </td>
             </tr>
           <!-- <td><%= block.credits_min %></td> -->
@@ -98,6 +82,22 @@
                   <% end %>
               <% end %>
           </table>
+          <div class="btn-group btn-group-justified" style="width:25%;">
+            <% if can? :edit, @block %>
+            <%= link_to edit_block_path(block), class: "btn btn-default" do %>
+              <span class="has-tooltip" data-toggle="tooltip" title="Bearbeiten">            
+                <i class="glyphicon glyphicon-pencil middle_icon"></i>
+              </span>
+            <% end %>
+            <% end %>
+            <% if can? :destroy, @block %>
+            <%= link_to block, method: :delete, data: { confirm: 'Sicher?' } , class: "btn btn-default" do %>
+              <span class="has-tooltip" data-toggle="tooltip" title="Löschen">
+                <i class="glyphicon glyphicon-trash middle_icon"></i>
+              </span>
+            <% end %>
+            <% end %>
+            </div>
           </td>
         </tr>
     <!-- </tbody> -->
@@ -124,22 +124,6 @@
         <% else %>
           <td>
         <% end %>
-        <div class="btn-group btn-group-justified">
-          <% if can? :edit, @block %>
-          <%= link_to edit_block_path(block), class: "btn btn-default" do %>
-            <span class="has-tooltip" data-toggle="tooltip" title="Bearbeiten">            
-              <i class="glyphicon glyphicon-pencil middle_icon"></i>
-            </span>
-          <% end %>
-          <% end %>
-          <% if can? :destroy, @block %>
-          <%= link_to block, method: :delete, data: { confirm: 'Sicher?' } , class: "btn btn-default" do %>
-            <span class="has-tooltip" data-toggle="tooltip" title="Löschen">
-              <i class="glyphicon glyphicon-trash middle_icon"></i>
-            </span>
-          <% end %>
-          <% end %>
-          </div>
           </td>
           </tr>
         <!-- <td><%= block.credits_min %></td> -->
@@ -177,6 +161,22 @@
                 <% end %>
             <% end %>
         </table>
+        <div class="btn-group btn-group-justified" style="width:25%;">
+            <% if can? :edit, @block %>
+            <%= link_to edit_block_path(block), class: "btn btn-default" do %>
+              <span class="has-tooltip" data-toggle="tooltip" title="Bearbeiten">            
+                <i class="glyphicon glyphicon-pencil middle_icon"></i>
+              </span>
+            <% end %>
+            <% end %>
+            <% if can? :destroy, @block %>
+            <%= link_to block, method: :delete, data: { confirm: 'Sicher?' } , class: "btn btn-default" do %>
+              <span class="has-tooltip" data-toggle="tooltip" title="Löschen">
+                <i class="glyphicon glyphicon-trash middle_icon"></i>
+              </span>
+            <% end %>
+            <% end %>
+            </div>
         </td>
       </tr>
 
