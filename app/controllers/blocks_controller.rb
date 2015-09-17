@@ -1,5 +1,8 @@
 class BlocksController < ApplicationController
-  before_action :set_block, only: [:show, :edit, :update, :destroy]
+ 
+load_and_authorize_resource
+
+   before_action :set_block, only: [:show, :edit, :update, :destroy]
 
   # GET /blocks
   # GET /blocks.json
@@ -11,18 +14,9 @@ class BlocksController < ApplicationController
     end
   end
 
-  # GET /blocks/1
-  # GET /blocks/1.json
-  def show
-  end
-
   # GET /blocks/new
   def new
     @block = Block.new
-  end
-
-  # GET /blocks/1/edit
-  def edit
   end
 
   # POST /blocks

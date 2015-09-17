@@ -47,27 +47,47 @@
 
 </div>
 <br/>
-  
-  <!-- if logged in, show the Button to mark an event-->
-  <% if logged_in? %>
-    <% unless @event.users.find_by(id: current_user.id) %>
-
-        <!-- <%= button_to "Veranstaltung hinzufügen", :action => "mark_event", :id => @id%> -->
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Hinzufügen</button>
+<div class="container_events">
+ <strong class="left-side" style="font-size: 1.15vw;">Rating &nbsp</strong>
+<!-- Displays the single stars for Average Rating -->
+<div style="display:inline-block">
+ <% query = "SELECT (avg(attend) + avg(tough) + avg(effort) + avg(share) + avg(material)) / 5 FROM ratings WHERE attend != 0 AND tough != 0 AND effort != 0 AND share != 0 AND material != 0 AND event_id = " + @event.id.to_s + ";" %>
+ <% records_result = ActiveRecord::Base.connection.execute(query) %>
+ <% result = records_result.getvalue(0, 0) %>
+  <% (1..5).each do |i| %>
+    <%if i <= (result.to_f + 0.5) %>
+      <li class="rating_avg" ></li>
     <% else %>
-    <p class="info_txt">
-         <strong>Die Veranstaltung <%= @event.title %> wurde zu deinem Plan hinzugefügt!</strong>
-    </p>
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Ändern oder Entfernen</button>
-    </br>
-    <%end %>
+      <li class="rating_rest" ></li>
+    <% end %>
+  <% end %>
+  </div>
+  <%= link_to 'Detailbewertung ansehen', rating_path(@event.ratings.find_or_create_by(user_id: current_user.id)), class: 'btn btn-default right_side' %>
+</div>
+<br/>
+
+<div class="container_events" style="background-color: rgba(1,1,1,0)">  
+  <!-- if logged in, show the Button to mark an event-->
+     <%if current_user.role !="admin"%>
+      <% if logged_in? %>
+        <% unless @event.users.find_by(id: current_user.id) %>
+          <!-- <%= button_to "Veranstaltung hinzufügen", :action => "mark_event", :id => @id%> -->
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Hinzufügen</button>
+      <% else %>
+      <p class="info_txt">
+           <strong>Die Veranstaltung <%= @event.title %> wurde zu deinem Plan hinzugefügt!</strong>
+      </p>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Ändern oder Entfernen</button>
+      <%end %>
+    <%end%>
 
     <% if can? :edit, Event %>
-  <%= link_to 'Bearbeiten', edit_event_path(@event), class: 'btn btn-default' %>
-<%end%>
+      <%= link_to 'Bearbeiten', edit_event_path(@event), class: 'btn btn-default' %>
+    <%end%>
   <% end %>
   <!-- back button incorrect, should lead to event page ??? -->
-<%= link_to 'Zurück zu den Veranstaltungen', :events, class: 'btn btn-default' %>
+<%= link_to 'Zurück', :back, class: 'btn btn-default' %>
+
 
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
@@ -77,7 +97,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h3 class="modal-title">Veranstaltung belegen</h3>
+        <h3 class="modal-title">Veranstaltung hinzufügen</h3>
       </div>
       <div class="modal-body">
       <p>
@@ -129,12 +149,12 @@
         </p>
         <% unless @event.users.find_by(id: current_user.id) %>
         <div id="selector">
-          <%= button_to("Veranstaltung belegen", {:action => "mark_event", :id => @id, :semester => ""}, :class => "btn btn-success") %>
+          <%= button_to("Veranstaltung hinzufügen", {:action => "mark_event", :id => @id, :semester => ""}, :class => "btn btn-success") %>
         </div>
         <%else%>
           <div class="my_div_container">
             <div id="selector" class="my_div_2">
-            <%= button_to("Veranstaltung belegen", {:action => "mark_event", :id => @id, :semester => ""}, :class => "btn btn-success") %>
+            <%= button_to("Veranstaltung hinzufügen", {:action => "mark_event", :id => @id, :semester => ""}, :class => "btn btn-success") %>
             </div>
           <div class="my_div_2">  
           <%= button_to("Veranstaltung abwählen", {:action => "demark_event", :id => @id}, :class => "btn btn-danger") %>
@@ -150,20 +170,3 @@
 
   </div>
 </div>
-<br/>
-<br/>
- <strong>Rating</strong>
-<!-- Displays the single stars for Average Rating -->
- <% query = "SELECT (avg(attend) + avg(tough) + avg(effort) + avg(share) + avg(material)) / 5 FROM ratings WHERE attend != 0 AND tough != 0 AND effort != 0 AND share != 0 AND material != 0 AND event_id = " + @event.id.to_s + ";" %>
- <% records_result = ActiveRecord::Base.connection.execute(query) %>
- <% result = records_result.getvalue(0, 0) %>
-  <% (1..5).each do |i| %>
-    <%if i <= (result.to_f + 0.5) %>
-      <li class="rating_avg" ></li>
-    <% else %>
-      <li class="rating_rest" ></li>
-    <% end %>
-  <% end %>
-</p>
-
-<%= link_to 'Detailsbewertung ansehen', rating_path(@event.ratings.find_or_create_by(user_id: current_user.id)), class: 'btn btn-default' %>

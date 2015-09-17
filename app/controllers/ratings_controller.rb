@@ -1,16 +1,13 @@
-#ratings_controller to handle the Rating-system
-#
-#
-
 class RatingsController < ApplicationController
   #creates the rating for the event, and response in Json-Format
-  
+
   def index
+    authorize! :index, @rating
     @event = Event.all
   end
 
   def create
-  
+    authorize! :create, @rating
     @rating = Rating.new(params[:rating])
     @event = Event.find(params[:rating][:event_id])
 
@@ -25,6 +22,7 @@ class RatingsController < ApplicationController
 
   #defines the update-Method for the shown stars
   def update
+    authorize! :update, @rating
     @rating = Rating.find(params[:id])
     @event = Event.find(params[:rating][:event_id])
 
@@ -44,18 +42,20 @@ class RatingsController < ApplicationController
  
     respond_to do |format|
       if @rating.save
-      format.json { 
-        render :json => {
-          success: true
+        format.json {
+          render :json => {
+            success: true
+          }
         }
-      }
+      end
     end
-end
   end
 
   def show
+    authorize! :show, @rating
    @rating = Rating.find(params[:id])
    @event = Rating.find(params[:id]).event
+   @user = current_user
   end
 
   private

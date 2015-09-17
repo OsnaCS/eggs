@@ -1,4 +1,7 @@
 class CoursesController < ApplicationController
+  
+  load_and_authorize_resource
+
   before_action :set_course, only: [:show, :edit, :update, :destroy]
 
   # GET /courses
@@ -7,18 +10,9 @@ class CoursesController < ApplicationController
     @courses = Course.all
   end
 
-  # GET /courses/1
-  # GET /courses/1.json
-  def show
-  end
-
   # GET /courses/new
   def new
     @course = Course.new
-  end
-
-  # GET /courses/1/edit
-  def edit
   end
 
   # POST /courses

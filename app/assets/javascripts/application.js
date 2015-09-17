@@ -14,9 +14,13 @@
 //= require jquery_ujs
 //= require jquery-ui
 //= require twitter/bootstrap
-//= require_tree .
 //= require highcharts
 //= require highcharts/highcharts-more
+//= require profiles
+//= require rating
+//= require_tree .
+
+
 
 $(document).ready(function() {
   $('.has-tooltip').tooltip();

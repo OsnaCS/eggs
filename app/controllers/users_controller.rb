@@ -1,7 +1,4 @@
 class UsersController < ApplicationController
-  #cancancan authorizingController
-
-  #load_and_authorize_resource
   
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
@@ -13,19 +10,9 @@ class UsersController < ApplicationController
     @users = User.search(params[:search]).order(sort_column + " " + sort_direction).paginate(:per_page => 10, :page => params[:page])
   end
 
-  # GET /users/1
-  # GET /users/1.json
-  def show
-  end
-
   # GET /users/new
   def new
     @user = User.new
-  end
-
-  # GET /users/1/edit
-  def edit
-
   end
 
   # POST /users
@@ -53,6 +40,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
+    authorize! :update, @user
     
     respond_to do |format|
       if @user.update(user_params)
