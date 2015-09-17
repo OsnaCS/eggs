@@ -40,7 +40,7 @@ checkKey = (e) ->
 
 
 $ ->
-    document.onkeydown = checkKey
+    #document.onkeydown = checkKey
 
 
 
