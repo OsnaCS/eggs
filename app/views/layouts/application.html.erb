@@ -73,6 +73,19 @@
 <div class="notification_container">
   <%= render partial: "/layouts/flash", flash: flash %>
 </div>
+<div class="easteregg">
+  <div class="overlay" %></div>
+  <%= image_tag "splat.png", class: "splat1" %>
+  <%= image_tag "splat.png", class: "splat2" %>
+  <%= image_tag "splat.png", class: "splat3" %>
+  <%= image_tag "splat.png", class: "splat4" %>
+  <%= image_tag "splat.png", class: "splat5" %>
+  <%= image_tag "meatball.png", class: "ball1" %>
+  <%= image_tag "meatball.png", class: "ball2" %>
+  <%= image_tag "meatball.png", class: "ball3" %>
+  <button class="overlaybutton btn btn-primary">close</button>
+  <%= audio_tag("splat.mp3")%>
+</div>
 <%= yield %>
 </div>
 
